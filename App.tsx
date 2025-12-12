@@ -27,7 +27,7 @@ const App: React.FC = () => {
                 <Sparkles className="text-white w-6 h-6" />
             </div>
             <h1 className="text-2xl font-bold text-white tracking-wide">
-              AlgoVision I
+              AlgoVision
             </h1>
           </div>
 
