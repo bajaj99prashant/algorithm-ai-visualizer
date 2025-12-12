@@ -18,15 +18,15 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 flex flex-col font-sans">
+    <div className="min-h-screen bg-gray-950 flex flex-col font-sans text-gray-100">
       {/* Navbar */}
       <header className="bg-gray-900 border-b border-gray-800 p-4 sticky top-0 z-20 shadow-md">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-tr from-blue-600 to-purple-600 p-2 rounded-lg">
+            <div className="bg-gradient-to-tr from-gray-700 to-gray-500 p-2 rounded-lg">
                 <Sparkles className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            <h1 className="text-2xl font-bold text-white tracking-wide">
               AlgoVision
             </h1>
           </div>
@@ -34,9 +34,9 @@ const App: React.FC = () => {
           <div className="flex bg-gray-800 p-1 rounded-lg border border-gray-700 overflow-x-auto">
             <button
               onClick={() => setMode(AppMode.SORTING)}
-              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap font-medium ${
                 mode === AppMode.SORTING
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-gray-100 text-gray-900 shadow-lg'
                   : 'text-gray-400 hover:text-white hover:bg-gray-700'
               }`}
             >
@@ -44,9 +44,9 @@ const App: React.FC = () => {
             </button>
             <button
               onClick={() => setMode(AppMode.PATHFINDING)}
-              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap font-medium ${
                 mode === AppMode.PATHFINDING
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-gray-100 text-gray-900 shadow-lg'
                   : 'text-gray-400 hover:text-white hover:bg-gray-700'
               }`}
             >
@@ -54,9 +54,9 @@ const App: React.FC = () => {
             </button>
             <button
               onClick={() => setMode(AppMode.HASHING)}
-              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all whitespace-nowrap font-medium ${
                 mode === AppMode.HASHING
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-gray-100 text-gray-900 shadow-lg'
                   : 'text-gray-400 hover:text-white hover:bg-gray-700'
               }`}
             >
@@ -92,11 +92,11 @@ const App: React.FC = () => {
 
       {/* Info Modal */}
       {(infoModalOpen || infoLoading) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[80vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
             <div className="flex items-center justify-between p-4 border-b border-gray-800">
               <h3 className="text-xl font-semibold flex items-center gap-2 text-white">
-                <Sparkles className="w-5 h-5 text-purple-400" />
+                <Sparkles className="w-5 h-5 text-gray-400" />
                 AI Explanation
               </h3>
               {!infoLoading && (
@@ -111,11 +111,11 @@ const App: React.FC = () => {
             <div className="p-6 overflow-y-auto text-gray-300 leading-relaxed">
                {infoLoading ? (
                    <div className="flex flex-col items-center justify-center py-12 gap-4">
-                       <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+                       <Loader2 className="w-10 h-10 text-white animate-spin" />
                        <p className="text-gray-400">Generating explanation with Gemini...</p>
                    </div>
                ) : (
-                   <div className="prose prose-invert max-w-none">
+                   <div className="prose prose-invert max-w-none prose-p:text-gray-300 prose-headings:text-gray-100 prose-strong:text-white">
                        <ReactMarkdown>{infoContent}</ReactMarkdown>
                    </div>
                )}
@@ -124,7 +124,7 @@ const App: React.FC = () => {
                 <div className="p-4 border-t border-gray-800 bg-gray-900/50 rounded-b-2xl flex justify-end">
                 <button 
                     onClick={() => setInfoModalOpen(false)}
-                    className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors border border-gray-700"
+                    className="px-4 py-2 bg-white hover:bg-gray-200 text-black font-medium rounded-lg transition-colors"
                 >
                     Close
                 </button>

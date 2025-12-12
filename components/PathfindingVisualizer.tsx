@@ -91,7 +91,7 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
         const node = visitedNodesInOrder[i];
         if (!node.isStart && !node.isFinish) {
           const element = document.getElementById(`node-${node.row}-${node.col}`);
-          if (element) element.className = 'node node-visited w-6 h-6 border border-blue-900/20 inline-block';
+          if (element) element.className = 'node node-visited w-6 h-6 border border-gray-600/30 inline-block';
         }
       }, 10 * i);
     }
@@ -103,7 +103,7 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
         const node = nodesInShortestPathOrder[i];
         if (!node.isStart && !node.isFinish) {
             const element = document.getElementById(`node-${node.row}-${node.col}`);
-            if (element) element.className = 'node node-shortest-path w-6 h-6 border border-blue-900/20 inline-block';
+            if (element) element.className = 'node node-shortest-path w-6 h-6 border border-white/50 inline-block';
         }
       }, 50 * i);
     }
@@ -161,7 +161,7 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
              const node = walls[i];
              const element = document.getElementById(`node-${node.row}-${node.col}`);
              if (element && !node.isStart && !node.isFinish) {
-                 element.className = 'node w-6 h-6 border border-gray-700/50 bg-gray-400 animate-pulse select-none inline-block';
+                 element.className = 'node w-6 h-6 border border-gray-700/50 bg-gray-500 animate-pulse select-none inline-block';
              }
           }, 10 * i);
       }
@@ -190,7 +190,7 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
         const node = grid[row][col];
         if (!node.isStart && !node.isFinish && !node.isWall) {
              const element = document.getElementById(`node-${row}-${col}`);
-             if (element) element.className = 'node w-6 h-6 border border-gray-700 inline-block bg-gray-800';
+             if (element) element.className = 'node w-6 h-6 border border-gray-800 inline-block bg-gray-900';
         }
       }
     }
@@ -206,12 +206,12 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
   return (
     <div className="flex flex-col h-full w-full p-4 items-center">
         {/* Controls */}
-        <div className="w-full flex flex-wrap items-center gap-4 mb-6 bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+        <div className="w-full flex flex-wrap items-center gap-4 mb-6 bg-gray-900 p-4 rounded-xl shadow-lg border border-gray-800">
             <select
                 value={algorithm}
                 onChange={(e) => setAlgorithm(e.target.value as AlgorithmType)}
                 disabled={isRunning}
-                className="bg-gray-700 text-white p-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-gray-800 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
             >
                 <option value={AlgorithmType.DIJKSTRA}>Dijkstra's Algorithm</option>
                 <option value={AlgorithmType.A_STAR}>A* Search</option>
@@ -222,8 +222,8 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
             <button
                 onClick={visualizeAlgorithm}
                 disabled={isRunning}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md font-bold text-white transition-colors ${
-                    isRunning ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+                className={`flex items-center gap-2 px-4 py-2 rounded-md font-bold text-gray-900 transition-colors ${
+                    isRunning ? 'bg-gray-600 cursor-not-allowed text-gray-400' : 'bg-white hover:bg-gray-200'
                 }`}
             >
                 <Play size={18} /> Visualize
@@ -232,7 +232,7 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
             <button
                 onClick={generateMaze}
                 disabled={isRunning}
-                className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-white bg-purple-600 hover:bg-purple-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-white bg-gray-700 hover:bg-gray-600 transition-colors border border-gray-600"
             >
                 <Grid size={18} /> Generate Maze
             </button>
@@ -240,31 +240,31 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
             <button
                 onClick={clearBoard}
                 disabled={isRunning}
-                className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors border border-gray-700"
             >
                 <Trash2 size={18} /> Clear Board
             </button>
 
              <button
                 onClick={handleExplain}
-                className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-blue-400 border border-blue-400/30 hover:bg-blue-400/10 transition-colors"
+                className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-gray-400 border border-gray-600 hover:bg-gray-800 hover:text-white transition-colors"
             >
                 <Info size={18} /> Explain with AI
             </button>
         </div>
         
         {/* Grid Info */}
-        <div className="flex gap-6 mb-4 text-sm text-gray-300">
+        <div className="flex gap-6 mb-4 text-sm text-gray-400">
             <div className="flex items-center gap-2"><div className="w-4 h-4 bg-green-500 rounded-full"></div> Start Node</div>
             <div className="flex items-center gap-2"><div className="w-4 h-4 bg-red-500 rounded-full"></div> Finish Node</div>
-            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-gray-400"></div> Wall</div>
-            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-[rgba(0,190,218,0.75)]"></div> Visited</div>
-            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-[rgb(255,254,106)]"></div> Shortest Path</div>
+            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-gray-500"></div> Wall</div>
+            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-gray-600 border border-gray-500"></div> Visited</div>
+            <div className="flex items-center gap-2"><div className="w-4 h-4 bg-white border border-white"></div> Shortest Path</div>
         </div>
 
         {/* Grid Container */}
         <div 
-            className="grid bg-gray-900 border border-gray-700 p-2 rounded-lg shadow-xl"
+            className="grid bg-gray-950 border border-gray-800 p-2 rounded-lg shadow-xl"
             onMouseLeave={handleMouseUp}
             style={{
                 gridTemplateColumns: `repeat(${GRID_COLS}, 1.5rem)`
@@ -273,16 +273,16 @@ const PathfindingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) 
             {grid.map((row, rowIdx) => (
                 row.map((node, nodeIdx) => {
                     const { row, col, isFinish, isStart, isWall } = node;
-                    let extraClass = 'bg-gray-800';
-                    if (isFinish) extraClass = 'bg-red-500 scale-75 rounded-full';
-                    else if (isStart) extraClass = 'bg-green-500 scale-75 rounded-full';
-                    else if (isWall) extraClass = 'bg-gray-400'; // animate-pulse removed for static wall look after generation
+                    let extraClass = 'bg-gray-900';
+                    if (isFinish) extraClass = 'bg-red-500 scale-75 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.6)]';
+                    else if (isStart) extraClass = 'bg-green-500 scale-75 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.6)]';
+                    else if (isWall) extraClass = 'bg-gray-500';
 
                     return (
                         <div
                             id={`node-${row}-${col}`}
                             key={`${row}-${col}`}
-                            className={`node w-6 h-6 border border-gray-700/50 ${extraClass} select-none inline-block`}
+                            className={`node w-6 h-6 border border-gray-800 ${extraClass} select-none inline-block`}
                             onMouseDown={() => handleMouseDown(row, col)}
                             onMouseEnter={() => handleMouseEnter(row, col)}
                             onMouseUp={() => handleMouseUp()}

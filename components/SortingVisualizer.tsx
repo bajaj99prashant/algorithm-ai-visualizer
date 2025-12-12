@@ -120,12 +120,12 @@ const SortingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
   return (
     <div className="flex flex-col h-full w-full p-4">
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-4 mb-6 bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+      <div className="flex flex-wrap items-center gap-4 mb-6 bg-gray-900 p-4 rounded-xl shadow-lg border border-gray-800">
         <select
           value={algorithm}
           onChange={(e) => setAlgorithm(e.target.value as AlgorithmType)}
           disabled={sorting}
-          className="bg-gray-700 text-white p-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-gray-800 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
         >
           <option value={AlgorithmType.BUBBLE_SORT}>Bubble Sort</option>
           <option value={AlgorithmType.MERGE_SORT}>Merge Sort</option>
@@ -142,7 +142,7 @@ const SortingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
                 value={size} 
                 onChange={(e) => setSize(Number(e.target.value))}
                 disabled={sorting}
-                className="w-24 h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer"
+                className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white"
             />
         </div>
 
@@ -155,15 +155,15 @@ const SortingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
                 value={speed} 
                 onChange={(e) => setSpeed(Number(e.target.value))}
                 disabled={sorting}
-                className="w-24 h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer"
+                className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white"
             />
         </div>
 
         <button
           onClick={handleRun}
           disabled={sorting}
-          className={`flex items-center gap-2 px-4 py-2 rounded-md font-bold text-white transition-colors ${
-            sorting ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+          className={`flex items-center gap-2 px-4 py-2 rounded-md font-bold text-gray-900 transition-colors ${
+            sorting ? 'bg-gray-600 cursor-not-allowed text-gray-400' : 'bg-white hover:bg-gray-200'
           }`}
         >
           <Play size={18} /> Run
@@ -172,14 +172,14 @@ const SortingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
         <button
           onClick={resetArray}
           disabled={sorting}
-          className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors border border-gray-700"
         >
           <RotateCcw size={18} /> Reset
         </button>
 
         <button
             onClick={handleExplain}
-            className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-blue-400 border border-blue-400/30 hover:bg-blue-400/10 transition-colors"
+            className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-gray-400 border border-gray-600 hover:bg-gray-800 hover:text-white transition-colors"
         >
             <Info size={18} /> Explain with AI
         </button>
@@ -188,12 +188,12 @@ const SortingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
       {/* Visualizer Area */}
       <div 
         ref={containerRef}
-        className="flex-1 flex items-end justify-center gap-1 bg-gray-900/50 rounded-xl p-4 min-h-[400px]"
+        className="flex-1 flex items-end justify-center gap-1 bg-gray-900/50 rounded-xl p-4 min-h-[400px] border border-gray-800"
       >
         {array.map((value, idx) => (
           <div
             key={idx}
-            className="array-bar bg-blue-500 rounded-t-sm"
+            className="array-bar bg-gray-400 rounded-t-sm"
             style={{
               height: `${value}%`,
               width: `${Math.max(2, 600 / size)}px`

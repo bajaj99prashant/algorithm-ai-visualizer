@@ -28,8 +28,8 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
   const clearColors = () => {
     cellRefs.current.forEach(cell => {
       if (cell) {
-        cell.style.backgroundColor = 'rgb(31, 41, 55)'; // bg-gray-800
-        cell.style.borderColor = 'rgb(55, 65, 81)'; // border-gray-700
+        cell.style.backgroundColor = '#1f2937'; // gray-800
+        cell.style.borderColor = '#374151'; // gray-700
       }
     });
   };
@@ -40,7 +40,8 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
     
     // Highlight
     cell.style.borderColor = isFound ? TERTIARY_COLOR : (isCollision ? SECONDARY_COLOR : PRIMARY_COLOR);
-    cell.style.backgroundColor = isFound ? 'rgba(16, 185, 129, 0.2)' : (isCollision ? 'rgba(239, 68, 68, 0.2)' : 'rgba(59, 130, 246, 0.2)');
+    // Use Grayscale for primary highlight instead of blue
+    cell.style.backgroundColor = isFound ? 'rgba(16, 185, 129, 0.2)' : (isCollision ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.1)');
     
     await new Promise(r => setTimeout(r, 600));
     
@@ -48,8 +49,8 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
        // Reset if just probing
        if (isCollision) {
           // Keep red tint briefly then reset or keep standard
-          cell.style.backgroundColor = 'rgb(31, 41, 55)';
-          cell.style.borderColor = 'rgb(55, 65, 81)';
+          cell.style.backgroundColor = '#1f2937';
+          cell.style.borderColor = '#374151';
        }
     }
   };
@@ -175,20 +176,20 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
   return (
     <div className="flex flex-col items-center h-full w-full p-8 max-w-5xl mx-auto">
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-4 mb-8 bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700 w-full justify-center">
+      <div className="flex flex-wrap items-center gap-4 mb-8 bg-gray-900 p-4 rounded-xl shadow-lg border border-gray-800 w-full justify-center">
          <input
            type="number"
            value={inputValue}
            onChange={(e) => setInputValue(e.target.value)}
            placeholder="Value"
-           className="bg-gray-700 text-white p-2 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-32"
+           className="bg-gray-800 text-white p-2 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 w-32"
            onKeyDown={(e) => e.key === 'Enter' && handleInsert()}
          />
          
          <button
            onClick={handleInsert}
            disabled={processing}
-           className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md font-bold text-white transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+           className="flex items-center gap-2 px-4 py-2 bg-white text-gray-900 hover:bg-gray-200 rounded-md font-bold transition-colors disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed"
          >
            <Play size={18} /> Insert
          </button>
@@ -196,7 +197,7 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
          <button
            onClick={handleSearch}
            disabled={processing}
-           className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md font-bold text-white transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+           className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-md font-bold text-white transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed border border-gray-600"
          >
            <Search size={18} /> Search
          </button>
@@ -204,21 +205,21 @@ const HashingVisualizer: React.FC<Props> = ({ onOpenInfo, setInfoLoading }) => {
          <button
             onClick={handleReset}
             disabled={processing}
-            className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-700 hover:bg-gray-600 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors border border-gray-700"
          >
             <RotateCcw size={18} /> Clear
          </button>
 
          <button
             onClick={handleExplain}
-            className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-blue-400 border border-blue-400/30 hover:bg-blue-400/10 transition-colors"
+            className="ml-auto flex items-center gap-2 px-3 py-2 rounded-md text-gray-400 border border-gray-600 hover:bg-gray-800 hover:text-white transition-colors"
         >
             <Info size={18} /> Explain
         </button>
       </div>
 
       {/* Message Area */}
-      <div className="mb-8 h-8 text-lg font-medium text-blue-300 animate-pulse">
+      <div className="mb-8 h-8 text-lg font-medium text-gray-300 animate-pulse">
           {message}
       </div>
 

@@ -1,4 +1,4 @@
-export const PRIMARY_COLOR = '#3b82f6'; // blue-500
+export const PRIMARY_COLOR = '#9ca3af'; // gray-400
 export const SECONDARY_COLOR = '#ef4444'; // red-500
 export const TERTIARY_COLOR = '#10b981'; // green-500 (sorted/path)
 export const SORTING_BAR_WIDTH_SMALL = 8;
